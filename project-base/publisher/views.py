@@ -8,7 +8,7 @@ from django.views.generic import UpdateView, CreateView, ListView
 
 
 from .forms import signUpForm, UserUpdateForm
-# Create your views here.
+
 
 class Home(ListView):
     template_name = 'home.html'
