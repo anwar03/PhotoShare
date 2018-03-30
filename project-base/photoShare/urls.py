@@ -1,14 +1,12 @@
-from django.conf.urls import patterns, include, url
-
+from django.conf.urls import include, url
+from django.urls import path
 from django.contrib import admin
-admin.autodiscover()
+from publisher import views
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'photoShare.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+urlpatterns =[
 
-    url(r'^admin/', include(admin.site.urls)),
+    path(r'admin/', admin.site.urls),
+    url(r'^$', views.Home, name='home'),
     url(r'^publisher/', include('publisher.urls')),
-    url(r'^album/', include('album.urls')),
-)
+    #url(r'^album/', include('album.urls')),
+]

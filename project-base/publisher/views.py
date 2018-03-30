@@ -4,12 +4,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import UpdateView, CreateView
+from django.views.generic import UpdateView, CreateView, ListView
 
 
 from .forms import signUpForm, UserUpdateForm
 # Create your views here.
 
+class Home(ListView):
+    template_name = 'home.html'
 
 class SignUp(CreateView):
     form_class = signUpForm
