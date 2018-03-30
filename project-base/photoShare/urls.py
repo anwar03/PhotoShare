@@ -8,5 +8,5 @@ urlpatterns =[
     path(r'admin/', admin.site.urls),
     url(r'^$', views.Home.as_view(), name='home'),
     url(r'^publisher/', include('publisher.urls')),
-    #url(r'^album/', include('album.urls')),
+    url(r'^album/', include('album.urls')),
 ]
