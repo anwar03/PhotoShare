@@ -12,6 +12,7 @@ from .forms import signUpForm, UserUpdateForm
 
 class Home(ListView):
     template_name = 'home.html'
+    queryset = []
 
 class SignUp(CreateView):
     form_class = signUpForm

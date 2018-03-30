@@ -6,7 +6,7 @@ from publisher import views
 urlpatterns =[
 
     path(r'admin/', admin.site.urls),
-    url(r'^$', views.Home, name='home'),
+    url(r'^$', views.Home.as_view(), name='home'),
     url(r'^publisher/', include('publisher.urls')),
     #url(r'^album/', include('album.urls')),
 ]
