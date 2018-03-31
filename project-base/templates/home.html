@@ -1,51 +1,31 @@
 {% extends 'base.html' %}
 
 {% block breadcrumb %}
-  <li class="breadcrumb-item active">Boards</li>
+  <li class="breadcrumb-item active">Album</li>
 {% endblock %}
 
 {% block content %}
   <table class="table table-striped table-hover">
     <thead class="thead-inverse">
       <tr>
-        <th>Board</th>
-        <th>Posts</th>
-        <th>Topics</th>
-        <th>Last Post</th>
-        {% if request.user.is_superuser %}<th>Action</th>{% endif %}
+        <th>Name</th>
+        <th>Link</th>
+        <th>password</th>
       </tr>
     </thead>
     <tbody>
-      {% for board in boards %}
+      {% for album in albums %}
         <tr>
-          <td>
-            <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
-            <small class="text-muted d-block">{{ board.description }}</small>
+          
+          <td class="align-middle">
+            {{ album.album_name }}
           </td>
           <td class="align-middle">
-            {{ board.get_posts_count }}
+            <p><em>No Link yet.</em></p>
           </td>
           <td class="align-middle">
-            {{ board.topics.count }}
+            <p><em>No Password yet.</em></p>
           </td>
-          <td class="align-middle">
-            {% with post=board.get_last_post %}
-              {% if post %}
-              <small>
-                <a href="{% url 'topic_posts' board.pk post.topic.pk %}">
-                  By {{ post.created_by.username }} at {{ post.created_at }}
-                </a>
-              </small>
-              {% else %}
-              <small class="text-muted">
-                <em>No posts yet.</em>
-              </small>
-              {% endif %}
-            {% endwith %}
-          </td>
-          {% if request.user.is_superuser %}
-          <td><a href="{% url 'delete_board' board.pk %}" class="btn btn-danger">Delete</a></td>
-          {% endif %}
         </tr>
       {% endfor %}
     </tbody>

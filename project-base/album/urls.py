@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.AlbumUpload, name='album'),
+    url(r'^$', views.CreateAlbum.as_view(), name='album'),
 ]
 
 if settings.DEBUG:
