@@ -11,3 +11,14 @@ table-header{
 .helptext{
   visibility: hidden;
 }
+
+.navbar-header{
+  background-color: #eaeaea;
+  color: #000000;
+}
+
+
+.image{
+  width: 300px;
+  height: 300px;
+}

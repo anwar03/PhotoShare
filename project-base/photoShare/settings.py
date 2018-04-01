@@ -22,7 +22,7 @@ HOME_DIR = os.path.realpath(os.path.join(REPO_DIR, '..'))
 STATIC_DIR = os.path.realpath(os.path.join(HOME_DIR, 'staticfiles'))
 # The directory where different applications uploads media files to
 # This can/should be located at ~/media, preferrably outside the git repo
-MEDIA_DIR = os.path.realpath(os.path.join(HOME_DIR, 'media'))
+MEDIA_DIR = os.path.realpath(os.path.join(REPO_DIR, 'media'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -123,9 +123,12 @@ STATICFILES_DIRS = [
     os.path.join(REPO_DIR, 'static'),
 ]
 
+
 LOGIN_URL = '/login/'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
+
+print('media: ', MEDIA_ROOT)

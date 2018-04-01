@@ -3,7 +3,7 @@
 {% block content %}
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% include 'includes/form.html'%}
     <button type="submit">Upload</button>
   </form>
 

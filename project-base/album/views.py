@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
@@ -11,7 +11,7 @@ from .models import Album
 class AlbumList(ListView):
     model = Album
     template_name = 'home.html'
-    context_object_name = 'Albums'
+    context_object_name = 'albums'
     
     def get_queryset(self):
         self.album = Album.objects.filter(publisher=self.request.user)
@@ -31,4 +31,11 @@ class CreateAlbum(CreateView):
         album.save()
         return redirect('home')
 
+class AlbumDetails(ListView):
+    template_name = 'album-details.html'
+    context_object_name = 'albums'
+    
+    def get_queryset(self):
+        queryset = Album.objects.filter(publisher=self.request.user)
+        return queryset
 

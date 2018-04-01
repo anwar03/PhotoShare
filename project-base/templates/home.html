@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 
-{% block breadcrumb %}
-  <li class="breadcrumb-item active">Album</li>
-{% endblock %}
-
 {% block content %}
+
+<a href="{% url 'album' %}" type="button" class="mt-2 mb-2 float-right btn btn-primary">New Album
+</a>
   <table class="table table-striped table-hover">
     <thead class="thead-inverse">
       <tr>
@@ -18,13 +17,13 @@
         <tr>
           
           <td class="align-middle">
-            {{ album.album_name }}
+            <a href="{% url 'album-details' album.slug %}"> {{ album.name }}</a>
           </td>
           <td class="align-middle">
-            <p><em>No Link yet.</em></p>
+            <p>{{ album.get_absulate_url }} </p>
           </td>
           <td class="align-middle">
-            <p><em>No Password yet.</em></p>
+            <p>{{ album.password }}</p>
           </td>
         </tr>
       {% endfor %}
