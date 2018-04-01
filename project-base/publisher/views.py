@@ -16,7 +16,7 @@ class Home(ListView):
 
 class SignUp(CreateView):
     form_class = signUpForm
-    template_name = 'signup.html'
+    template_name = 'user/signup.html'
 
     def form_valid(self, form):
         user = form.save()
@@ -26,8 +26,8 @@ class SignUp(CreateView):
 
 class UserUpdateView(UpdateView):
     form_class = UserUpdateForm
-    template_name = 'accounts.html'
-    success_url = reverse_lazy('my_accounts')
+    template_name = 'user/publisher.html'
+    success_url = reverse_lazy('publisher')
 
     def get_object(self):
         return self.request.user

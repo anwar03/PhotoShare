@@ -11,5 +11,7 @@ class User(models.Model):
     password1 = models.CharField(max_length=12, blank=False)
     password2 = models.CharField(max_length=12, blank=False)
 
+    USERNAME_FIELD = 'email'
+
     def __str__(self):
         return self.username

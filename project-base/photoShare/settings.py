@@ -10,7 +10,20 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# The root of the git repo - Could be ~/project or ~/repo
+REPO_DIR = os.path.realpath(os.path.join(BASE_DIR, '..'))
+# The directory of the current user ie /home/django a.k.a. ~
+HOME_DIR = os.path.realpath(os.path.join(REPO_DIR, '..'))
+# The directory where collectstatic command copies/symlinks the files to
+# This can/should be located at ~/staticfiles, preferrably outside the git repo
+STATIC_DIR = os.path.realpath(os.path.join(HOME_DIR, 'staticfiles'))
+# The directory where different applications uploads media files to
+# This can/should be located at ~/media, preferrably outside the git repo
+MEDIA_DIR = os.path.realpath(os.path.join(HOME_DIR, 'media'))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -107,11 +120,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(REPO_DIR, 'static'),
 ]
 
-LOGOUT_REDIRECT_URL = 'home'
+LOGIN_URL = '/login/'
+LOGOUT_REDIRECT_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 
+MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
