@@ -36,10 +36,28 @@ class Album(models.Model):
     slug = models.SlugField(default=slug_generator, unique=True, max_length=10)
     created_at = models.DateTimeField(auto_now_add=True)
     password = models.CharField(default=password_generator, unique=True, max_length=6)
-    image = models.ImageField(upload_to=get_image_filename)
 
 
     def __str__(self):
         return self.name
 
     
+class Comment(models.Model):
+    comment = models.CharField(max_length=255, blank=False)
+    album = models.ForeignKey(Album, related_name='comments', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=timezone.now())
+    edited = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('-created_at', )
+        verbose_name = ('Comment')
+        verbose_name_plural = ('Comments')
+
+    def __str__(self):
+        truncated_comment = Truncator(self.comment)
+        return truncated_comment.chars(100)
+    
+
+class AlbumCollection(models.Model):
+    album = models.ForeignKey(Album, related_name='comments', on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, related_name='comments', on_delete=models.CASCADE) 

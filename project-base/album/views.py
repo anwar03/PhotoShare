@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView, ListView, DetailView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 from .forms import AlbumForm
-from .models import Album
+from .models import Album, Image, Comment, AlbumCollection
 
 
 @method_decorator(login_required, name='dispatch')
@@ -17,6 +18,7 @@ class AlbumList(ListView):
         self.album = Album.objects.filter(publisher=self.request.user)
         queryset = self.album
         print('queryset: ', queryset)
+        print('HOST: ', settings.ALLOWED_HOSTS)
         return queryset
 
 
