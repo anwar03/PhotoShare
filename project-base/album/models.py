@@ -59,5 +59,14 @@ class Comment(models.Model):
     
 
 class AlbumCollection(models.Model):
-    album = models.ForeignKey(Album, related_name='comments', on_delete=models.CASCADE)
-    image = models.ForeignKey(Image, related_name='comments', on_delete=models.CASCADE) 
+    album = models.ForeignKey(Album)
+    image = models.ForeignKey(Image)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return u'{}'.format(self.album)
+
+    class Meta:
+        unique_together = ('album', 'image')
+        index_together = ('album', 'image')
