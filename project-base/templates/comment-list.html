@@ -1,0 +1,11 @@
+
+<a href="{% url 'comment' album.pk %}">comment</a>
+{% for comment in comments %}
+<div class="row">
+    <div class="col" >
+        <ul>
+            <li>{{ comment.comment }}</li>
+        </ul>
+    </div>
+</div>
+{% endfor %}

@@ -130,5 +130,3 @@ LOGIN_REDIRECT_URL = 'home'
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
-
-print('media: ', MEDIA_ROOT)

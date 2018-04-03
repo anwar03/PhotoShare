@@ -1,0 +1,12 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% include 'includes/form.html'%}
+    <button type="submit">comment</button>
+  </form>
+
+ <a class="btn btn-primary" href="{% url 'album-details' album.id %}">Album</a>
+{% endblock %}

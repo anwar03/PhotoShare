@@ -10,8 +10,7 @@ from django.db.models import permalink
 
 
 def get_image_filename(instance, filename):
-    name = instance.name
-    return "album/%s/%s" % (name, filename)
+    return "album/%s" % (filename)
 
 def slug_generator():
         n = 10
@@ -23,12 +22,6 @@ def password_generator():
         random = str.ascii_uppercase + str.ascii_lowercase + str.digits
         return ''.join(choice(random) for _ in range(n))
 
-class Image(models.Model):
-    publisher = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='images', on_delete=models.CASCADE)
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to=get_image_filename)
-
-
 
 class Album(models.Model):
     publisher = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='album', on_delete=models.CASCADE, null=True)
@@ -37,11 +30,24 @@ class Album(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     password = models.CharField(default=password_generator, unique=True, max_length=6)
 
+    def __unicode__(self):
+        return self.name
 
     def __str__(self):
         return self.name
 
+
+class Image(models.Model):
+    publisher = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='images', on_delete=models.CASCADE)
+    album = models.ForeignKey(Album, related_name='images', on_delete=models.CASCADE)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='album/')
+
+
+    def __str__(self):
+        return self.album
     
+
 class Comment(models.Model):
     comment = models.CharField(max_length=255, blank=False)
     album = models.ForeignKey(Album, related_name='comments', on_delete=models.CASCADE)
@@ -54,10 +60,11 @@ class Comment(models.Model):
         verbose_name_plural = ('Comments')
 
     def __str__(self):
-        truncated_comment = Truncator(self.comment)
-        return truncated_comment.chars(100)
-    
+        return self.comment
 
+
+    
+'''
 class AlbumCollection(models.Model):
     album = models.ForeignKey(Album)
     image = models.ForeignKey(Image)
@@ -69,4 +76,5 @@ class AlbumCollection(models.Model):
 
     class Meta:
         unique_together = ('album', 'image')
-        index_together = ('album', 'image')
+        index_together = ('album', 'image')'''
+
