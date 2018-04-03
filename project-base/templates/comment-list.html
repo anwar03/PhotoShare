@@ -1,5 +1,7 @@
 
-<a href="{% url 'comment' album.pk %}">comment</a>
+<p>{{ likes }}</p><a class="btn btn-primary" href="{% url 'like' album.pk %}">like</a>
+<a class="btn btn-danger" href="{% url 'dislike' like.id %}">dislike</a>
+<a class="btn btn-primary float-right" href="{% url 'comment' album.pk %}">comment</a>
 {% for comment in comments %}
 <div class="row">
     <div class="col" >
