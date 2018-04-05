@@ -30,16 +30,11 @@ class Album(models.Model):
     slug = models.SlugField(default=slug_generator, unique=True, max_length=10)
     created_at = models.DateTimeField(auto_now_add=True)
     password = models.CharField(default=password_generator, unique=True, max_length=6)
-    like = models.IntegerField(default=0)
+    
 
     def __str__(self):
         return self.name
 
-    def set_like(self):
-        self.like += 1
-    
-    def del_like(self):
-        self.like -= 1
     
 
 
@@ -51,21 +46,6 @@ class Image(models.Model):
 
     def __str__(self):
         return self.name
-
-class Comment(models.Model):
-    comment = models.CharField(max_length=255, blank=False)
-    album = models.ForeignKey(Album, related_name='comments', on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=timezone.now())
-    edited = models.BooleanField(default=False)
-
-    class Meta:
-        ordering = ('-created_at', )
-        verbose_name = ('Comment')
-        verbose_name_plural = ('Comments')
-
-    def __str__(self):
-        return self.comment
-
 
     
 
@@ -81,11 +61,4 @@ class AlbumCollection(models.Model):
     class Meta:
         unique_together = ('album', 'image')
         index_together = ('album', 'image')
-
-
-class Like(models.Model):
-    album = models.ForeignKey(Album, related_name='likes', on_delete=models.CASCADE)
-    like = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    
 

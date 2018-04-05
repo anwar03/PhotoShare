@@ -52,6 +52,8 @@ INSTALLED_APPS = (
     'widget_tweaks',
     'publisher',
     'album',
+    'comment',
+    'like',
 )
 
 MIDDLEWARE = (
