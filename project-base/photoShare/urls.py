@@ -11,7 +11,7 @@ from album import views
 urlpatterns =[
 
     path(r'admin/', admin.site.urls),
-    url(r'^$', views.AlbumList.as_view(), name='home'),
+    url(r'^$', views.AlbumListView.as_view(), name='home'),
     url(r'^publisher/', include('publisher.urls')),
     url(r'^album/', include('album.urls')),
 

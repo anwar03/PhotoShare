@@ -11,11 +11,15 @@
 	<table class="table">
 		<thead class="thead-light">
 			<th>Comments</th>
+			<th></th>
 		</thead>
 		{% for comment in comments %}
 		<tbody>
 			<tr>
 				<td>{{ comment.comment }}</td>
+				{% if is_owner %}
+				<td><a class="btn btn-danger" href="{% url 'comment-delete' comment.id %}">Delete</a></td>
+				{% endif %}
 			</tr>
 		</tbody>
 		{% endfor %}

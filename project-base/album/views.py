@@ -12,7 +12,9 @@ from like.models import Like
 
 
 @method_decorator(login_required, name='dispatch')
-class AlbumList(ListView):
+class AlbumListView(ListView):
+    """ Return Album list for Publisher."""
+
     model = Album
     template_name = 'home.html'
     context_object_name = 'albums'
@@ -23,7 +25,9 @@ class AlbumList(ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-class CreateAlbum(CreateView):
+class CreateAlbumView(CreateView):
+    """Create Album and redirect home directory."""
+
     form_class = AlbumForm
     template_name = 'album.html'
 
@@ -35,7 +39,9 @@ class CreateAlbum(CreateView):
 
 
 
-class AlbumDetails(ListView):
+class AlbumDetailsView(ListView):
+    """Return album details for viewer."""
+
     template_name = 'album-details.html'
     context_object_name = 'albums'
 
@@ -47,6 +53,7 @@ class AlbumDetails(ListView):
         kwargs['comments']= self.comments
         kwargs['likes']= likes.count()
         kwargs['like'] = likes.last()
+        kwargs['is_owner'] = album.publisher == self.request.user
 
         return super().get_context_data(**kwargs)
 

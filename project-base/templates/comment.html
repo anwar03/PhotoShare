@@ -5,7 +5,7 @@
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% include 'includes/form.html'%}
-    <button type="submit">comment</button>
+    <button class="btn btn-success" type="submit">comment</button>
   </form>
 
  <a class="btn btn-primary mt-3" href="{% url 'album-details' album.id %}">Album</a>

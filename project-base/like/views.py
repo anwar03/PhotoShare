@@ -9,7 +9,8 @@ from album.models import Album
 
 
 class Like(CreateView):
-    
+    """ Create Like."""
+
     form_class = LikeForm
     template_name = 'like.html'
 
@@ -27,6 +28,8 @@ class Like(CreateView):
 
 
 class DisLike(DeleteView):
+    """Like object delete view."""
+
     model = Like
     template_name = 'like_confirm_delete.html'
     pk_url_kwarg = 'like_pk'
