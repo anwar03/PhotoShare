@@ -7,6 +7,9 @@ from django.urls import reverse_lazy
 
 from .forms import AlbumForm
 from .models import Album, Image, AlbumCollection
+from comment.models import Comment
+from like.models import Like
+
 
 @method_decorator(login_required, name='dispatch')
 class AlbumList(ListView):
@@ -15,8 +18,7 @@ class AlbumList(ListView):
     context_object_name = 'albums'
     
     def get_queryset(self):
-        self.album = Album.objects.filter(publisher=self.request.user)
-        queryset = self.album
+        queryset = Album.objects.filter(publisher=self.request.user)
         return queryset
 
 
@@ -39,18 +41,17 @@ class AlbumDetails(ListView):
 
     def get_context_data(self, **kwargs):
         album = Album.objects.get(id=self.kwargs.get('pk'))
-        kwargs['album'] = album
         self.comments = Comment.objects.filter(album_id=self.kwargs.get('pk'))
-        kwargs['comments']= self.comments
         likes = Like.objects.filter(album_id=self.kwargs.get('pk'))
+        kwargs['album'] = album
+        kwargs['comments']= self.comments
         kwargs['likes']= likes.count()
         kwargs['like'] = likes.last()
-        print('id: ', likes.last())
+
         return super().get_context_data(**kwargs)
 
     
     def get_queryset(self):
-        queryset = Album.objects.filter(id=self.kwargs.get('pk'))
-        print('queryset: ', queryset)
+        queryset = AlbumCollection.objects.filter(album_id=self.kwargs.get('pk'))
         return queryset
 

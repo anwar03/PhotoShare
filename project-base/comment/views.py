@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 
 from .forms import CommentForm
 from .models import Comment
+from album.models import Album
 
 
 class CommentCreateView(CreateView):

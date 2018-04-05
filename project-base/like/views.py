@@ -1,16 +1,14 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
-from django.conf import settings
 from django.urls import reverse_lazy
 
 from .forms import LikeForm
 from .models import  Like
+from album.models import Album
 
 
 
-class LikeCreate(CreateView):
+class Like(CreateView):
     
     form_class = LikeForm
     template_name = 'like.html'
@@ -30,7 +28,6 @@ class LikeCreate(CreateView):
 
 class DisLike(DeleteView):
     model = Like
-    success_url = reverse_lazy('album-details')
     template_name = 'like_confirm_delete.html'
     pk_url_kwarg = 'like_pk'
     

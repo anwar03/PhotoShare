@@ -1,13 +1,25 @@
 
-<p>{{ likes }}</p><a class="btn btn-primary" href="{% url 'like' album.pk %}">like</a>
+<p class="font-weight-bold">{{ likes }} Likes</p>
+<a class="btn btn-primary" href="{% url 'like' album.pk %}">like</a>
+{% if likes > 0 %}
 <a class="btn btn-danger" href="{% url 'dislike' like.id %}">dislike</a>
+{% endif %}
 <a class="btn btn-primary float-right" href="{% url 'comment' album.pk %}">comment</a>
-{% for comment in comments %}
-<div class="row">
-    <div class="col" >
-        <ul>
-            <li>{{ comment.comment }}</li>
-        </ul>
-    </div>
+
+<div class="row mt-3">
+
+	<table class="table">
+		<thead class="thead-light">
+			<th>Comments</th>
+		</thead>
+		{% for comment in comments %}
+		<tbody>
+			<tr>
+				<td>{{ comment.comment }}</td>
+			</tr>
+		</tbody>
+		{% endfor %}
+	</table>
+
 </div>
-{% endfor %}
+

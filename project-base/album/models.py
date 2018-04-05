@@ -35,6 +35,10 @@ class Album(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absulate_url(self):
+        url = reverse('album-details', kwargs={ 'pk': self.id } )
+        return "%s%s" % ('http://localhost:8000', url)
+
     
 
 
